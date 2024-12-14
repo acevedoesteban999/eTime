@@ -23,7 +23,7 @@ void init_timer_hard(gptimer_handle_t timer_handler,int alarm,void* callback){
     gptimer_config_t timer_config = {
         .clk_src = GPTIMER_CLK_SRC_DEFAULT,
         .direction = GPTIMER_COUNT_UP,
-        .resolution_hz = FRECUENCY_TIMER
+        .resolution_hz = TIME_FRECUENCY_TIMER
     };
     ESP_ERROR_CHECK(gptimer_new_timer(&timer_config, &timer_handler));
     
