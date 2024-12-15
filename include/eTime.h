@@ -4,7 +4,7 @@
 #include "freertos/queue.h"
 #include "freertos/timers.h"
 
-#define FRECUENCY_TIMER 40e6
+#define TIME_FRECUENCY_TIMER 40e6
 
 void clear_timer_hard(gptimer_handle_t timer_handler);
 
