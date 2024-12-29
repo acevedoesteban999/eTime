@@ -2,11 +2,6 @@
 
 //HARDW
 
-// static bool gptimer_callback(gptimer_handle_t timer, const gptimer_alarm_event_data_t *edata, void *user_ctx)
-// {
-//     xQueueSendFromISR(queue,&_struct,pdMS_TO_TICKS(1)); 
-//     return true;
-// }
 
 void clear_timer_hard(gptimer_handle_t timer_handler){
     if(timer_handler != NULL){
@@ -16,6 +11,14 @@ void clear_timer_hard(gptimer_handle_t timer_handler){
     }
 }
 
+
+/*
+EXAMPLE CALLBACK
+static bool gptimer_callback(gptimer_handle_t timer, const gptimer_alarm_event_data_t *edata, void *user_ctx){
+    xQueueSendFromISR(queue,&_struct,pdMS_TO_TICKS(1)); 
+    return true;
+}
+*/
 void init_timer_hard(gptimer_handle_t timer_handler,int alarm,void* callback){
     //FOR REINIT
     
@@ -48,10 +51,6 @@ void init_timer_hard(gptimer_handle_t timer_handler,int alarm,void* callback){
 
 
 
-// void timer_soft_callback(gptimer_handle_t xTimer) {
-//     size_t index =  ( size_t )pvTimerGetTimerID(xTimer);
-//     xQueueSendFromISR(queue,&_struct,pdMS_TO_TICKS(1)); 
-// }
 
 void clear_timer_soft(TimerHandle_t timer_handler){
     if (timer_handler != NULL && xTimerIsTimerActive(timer_handler) != pdFALSE){
@@ -60,6 +59,13 @@ void clear_timer_soft(TimerHandle_t timer_handler){
     }
 }
    
+/*
+EXAMPLE CALLBACK
+void timer_soft_callback(gptimer_handle_t xTimer) {
+    size_t index =  ( size_t )pvTimerGetTimerID(xTimer);
+    xQueueSendFromISR(queue,&_struct,pdMS_TO_TICKS(1)); 
+}
+*/
 void init_timer_soft(TimerHandle_t timer_handler,int alarm,void*callback ){
     clear_timer_soft(timer_handler);
     timer_handler = xTimerCreate(
@@ -71,3 +77,5 @@ void init_timer_soft(TimerHandle_t timer_handler,int alarm,void*callback ){
     );
     xTimerStart(timer_handler,1);
 }
+
+
